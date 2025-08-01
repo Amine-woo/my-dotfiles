@@ -41,6 +41,29 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 - Additional scripts for screenshots and various utilities (check the `scripts/` folder).
 
 ---
+### Waybar Controls
+
+  -Network: launches networkmanager-dmenu.
+
+  -Brightness: controls brightness via brightnessctl.
+
+  -Power profiles: switch profiles (performance/powersaver).
+
+  -Session: manage logout/shutdown/reboot with wlogout.
+
+### Terminal
+
+  -Launch Kitty with zsh + Powerlevel10k, including autocompletions and autosuggestions.
+
+### Extra Scripts
+
+  -Includes various utilities (e.g., screenshots). Explore the repository for more.
+
+### Credits
+
+  Waybar layout inspired by @Rocklinks (Niri config).
+
+  -Wallpaper scripts by @OrigamingWasTaken, who also personally helped me with this setup.
 
 ## Installation
 
