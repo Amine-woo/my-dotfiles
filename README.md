@@ -4,7 +4,7 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 
 ---
 
-##Features
+## Features
 
 ### 🖼 Wallpapers & Dynamic Themes
 - **`wallpaperdaemon`**  
@@ -17,7 +17,7 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 
 ---
 
-###Waybar Integration
+### Waybar Integration
 - **Network management:** `networkmanager-dmenu`
 - **Brightness control:** `brightnessctl`
 - **Power profiles:** `powerprofilesctl`
@@ -25,7 +25,7 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 
 ---
 
-###Terminal
+### Terminal
 - **Kitty** terminal with:
   - **zsh**, **oh-my-zsh**
   - **Powerlevel10k**
