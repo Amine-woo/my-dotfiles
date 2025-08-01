@@ -45,8 +45,6 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 ## Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/<repo-name>.git ~/.config
+# Clone the repository into your ~/.config folder
+git clone https://github.com/Amine-woo/my-dotfiles.git ~/.config
 
-# (Optional) Symlink to .config
-ln -s ~/.config/<repo-name>/* ~/.config/
