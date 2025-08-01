@@ -1,0 +1,70 @@
+2025-07-31 18:19:29.575 [info] [main] Log level: Info
+2025-07-31 18:19:29.575 [info] [main] Validating found git in: "git"
+2025-07-31 18:19:29.575 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 18:19:29.575 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 18:19:29.575 [info] > git rev-parse --show-toplevel [22ms]
+2025-07-31 18:19:29.575 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (1), unsafe repositories (0)
+2025-07-31 18:21:45.657 [info] > git rev-parse --show-toplevel [2ms]
+2025-07-31 18:51:42.965 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 18:51:46.699 [info] [main] Log level: Info
+2025-07-31 18:51:46.699 [info] [main] Validating found git in: "git"
+2025-07-31 18:51:46.699 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 18:51:46.699 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 18:51:46.699 [info] > git rev-parse --show-toplevel [27ms]
+2025-07-31 18:51:46.717 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 18:51:46.749 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 18:51:46.752 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (1), unsafe repositories (0)
+2025-07-31 18:51:46.941 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 18:51:47.523 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 18:51:51.488 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 18:51:51.504 [info] > git rev-parse --git-dir --git-common-dir [4ms]
+2025-07-31 18:51:51.533 [info] [Model][openRepository] Opened repository (path): /home/amine
+2025-07-31 18:51:51.533 [info] [Model][openRepository] Opened repository (real path): /home/amine
+2025-07-31 18:51:51.557 [info] > git config --get commit.template [6ms]
+2025-07-31 18:51:51.579 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [6ms]
+2025-07-31 18:51:51.591 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 18:51:51.594 [info] > git rev-parse refs/remotes/origin/main [2ms]
+2025-07-31 18:51:51.626 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [4ms]
+2025-07-31 18:51:52.112 [info] > git status -z -uall [504ms] (cancelled)
+2025-07-31 18:51:54.467 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [2363ms]
+2025-07-31 18:51:54.497 [info] > git check-ignore -v -z --stdin [54ms]
+2025-07-31 18:51:54.499 [info] > git config --get --local branch.main.vscode-merge-base [17ms]
+2025-07-31 18:51:54.499 [warning] [Git][config] git config failed: Failed to execute git
+2025-07-31 18:51:54.513 [info] > git config --get commit.template [54ms]
+2025-07-31 18:51:54.527 [info] > git reflog main --grep-reflog=branch: Created from *. [15ms]
+2025-07-31 18:51:54.541 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [14ms]
+2025-07-31 18:51:54.553 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 18:51:54.555 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [16ms]
+2025-07-31 18:51:54.569 [info] > git rev-parse refs/remotes/origin/main [16ms]
+2025-07-31 18:51:54.599 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [32ms]
+2025-07-31 18:51:54.703 [info] > git config --add --local branch.main.vscode-merge-base origin/main [91ms]
+2025-07-31 18:51:54.704 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [107ms] (cancelled)
+2025-07-31 18:51:54.759 [info] > git status -z -uall [175ms] (cancelled)
+2025-07-31 18:51:54.760 [info] > git show --textconv :.config/waybar/config [30ms]
+2025-07-31 18:51:54.768 [info] > git config --get commit.template [11ms]
+2025-07-31 18:51:54.768 [info] > git ls-files --stage -- .config/waybar/config [23ms]
+2025-07-31 18:51:54.797 [info] > git cat-file -s 7baa0da830e204a151347a3cf41eabae10c3a5b2 [16ms]
+2025-07-31 18:51:54.802 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [6ms]
+2025-07-31 18:51:54.817 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 18:51:54.820 [info] > git rev-parse refs/remotes/origin/main [4ms]
+2025-07-31 18:51:54.849 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [4ms]
+2025-07-31 18:51:56.885 [info] > git status -z -uall [2053ms] (cancelled)
+2025-07-31 18:51:56.885 [info] > git check-ignore -v -z --stdin [1711ms]
+2025-07-31 18:51:56.886 [info] > git merge-base refs/heads/main refs/remotes/origin/main [1725ms]
+2025-07-31 18:51:56.895 [info] > git merge-base refs/heads/main refs/remotes/origin/main [1749ms]
+2025-07-31 18:51:56.936 [info] > git diff --name-status -z --diff-filter=ADMR d5122ef9e13aed9bd6644faaebee40cd7041c707...refs/remotes/origin/main [29ms]
+2025-07-31 18:51:56.937 [info] > git diff --name-status -z --diff-filter=ADMR d5122ef9e13aed9bd6644faaebee40cd7041c707...refs/remotes/origin/main [42ms]
+2025-07-31 18:51:57.230 [info] > git ls-files --stage -- .config/waybar/config [13ms]
+2025-07-31 18:51:57.265 [info] > git cat-file -s 7baa0da830e204a151347a3cf41eabae10c3a5b2 [20ms]
+2025-07-31 18:51:57.269 [info] > git blame --root --incremental d5122ef9e13aed9bd6644faaebee40cd7041c707 -- .config/waybar/config [5ms]
+2025-07-31 18:51:57.358 [info] > git show --textconv :.config/waybar/config [4ms]
+2025-07-31 18:53:16.075 [info] > git show --textconv :.config/waybar/style.css [16ms]
+2025-07-31 18:53:16.077 [info] > git ls-files --stage -- .config/waybar/style.css [5ms]
+2025-07-31 18:53:16.092 [info] > git cat-file -s 5044cc4d4421bf075ed9893df5ad282b29cda88f [3ms]
+2025-07-31 18:53:16.333 [info] > git blame --root --incremental d5122ef9e13aed9bd6644faaebee40cd7041c707 -- .config/waybar/style.css [6ms]
+2025-07-31 18:54:08.471 [info] > git ls-files --stage -- .config/waybar/style.css [3ms]
+2025-07-31 18:54:08.488 [info] > git cat-file -s 5044cc4d4421bf075ed9893df5ad282b29cda88f [3ms]
+2025-07-31 18:54:08.509 [info] > git show --textconv :.config/waybar/style.css [5ms]
+2025-07-31 19:04:46.199 [info] > git ls-files --stage -- .config/waybar/style.css [3ms]
+2025-07-31 19:04:46.218 [info] > git cat-file -s 5044cc4d4421bf075ed9893df5ad282b29cda88f [5ms]
+2025-07-31 19:04:46.303 [info] > git show --textconv :.config/waybar/style.css [4ms]

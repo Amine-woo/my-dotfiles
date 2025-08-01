@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+
+import socket
+import sys
+import argparse
+import json
+from pathlib import Path
+import subprocess
+
+SOCKET_PATH = Path("/tmp/wallpaper.sock")
+GUI_SCRIPT_PATH = Path(__file__).resolve().parent / "wallpaper_gui.py"
+
+def send_command(command):
+    if not SOCKET_PATH.exists():
+        print(f"Error: Daemon socket {SOCKET_PATH} not found. Is the daemon running?", file=sys.stderr)
+        return
+
+    client_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    try:
+        client_socket.connect(str(SOCKET_PATH))
+        client_socket.sendall(command.encode("utf-8"))
+        
+        response_parts = []
+        while True:
+            part = client_socket.recv(4096)
+            if not part:
+                break
+            response_parts.append(part)
+        
+        client_socket.shutdown(socket.SHUT_RD) 
+        response = b"".join(response_parts).decode("utf-8")
+
+        if command.strip().lower() == "list_json":
+            try:
+                parsed_json = json.loads(response)
+                print(json.dumps(parsed_json, indent=2))
+            except json.JSONDecodeError:
+                print(response)
+        else:
+            print(response)
+    except socket.error as e:
+        print(f"Socket error: {e}", file=sys.stderr)
+        print("Is the wallpaper daemon running?", file=sys.stderr)
+    except Exception as e:
+        print(f"An error occurred: {e}", file=sys.stderr)
+    finally:
+        client_socket.close()
+
+
+def launch_gui():
+    if not GUI_SCRIPT_PATH.exists():
+        print(f"Error: GUI script not found at {GUI_SCRIPT_PATH}", file=sys.stderr)
+        sys.exit(1)
+    
+    if not SOCKET_PATH.exists():
+        print(f"Error: Daemon socket {SOCKET_PATH} not found. Cannot launch GUI.", file=sys.stderr)
+        print("Please start wallpaperdaemon.py first.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Launching GUI from: {GUI_SCRIPT_PATH}")
+    try:
+        subprocess.Popen([sys.executable, str(GUI_SCRIPT_PATH)])
+    except Exception as e:
+        print(f"Failed to launch GUI: {e}", file=sys.stderr)
+        sys.exit(1)
+
+def main():
+    parser = argparse.ArgumentParser(description="Control the Wallpaper Daemon.")
+    
+    subparsers = parser.add_subparsers(dest="command", help="Available commands", required=True)
+
+    subparsers.add_parser("next", help="Transition to the next random wallpaper.")
+    subparsers.add_parser("refresh", help="Refresh the current wallpaper and theme.")
+    subparsers.add_parser("restart", help="Reload wallpapers from disk and set a new random one.")
+    subparsers.add_parser("current", help="Show the current wallpaper.")
+    
+    list_parser = subparsers.add_parser("list", help="List available wallpapers.")
+    list_parser.add_argument(
+        "format", nargs="?", choices=["text", "json"], default="text",
+        help="Output format (text or json, defaults to text)"
+    )
+    
+    subparsers.add_parser("stop_daemon", help="Tell the daemon to shut down gracefully.")
+    subparsers.add_parser("gui", help="Open the GTK wallpaper selection GUI.")
+
+    args = parser.parse_args()
+
+    if args.command == "gui":
+        launch_gui()
+        sys.exit(0)
+
+    command_to_send = args.command
+    if args.command == "list":
+        if args.format == "json":
+            command_to_send = "list_json"
+        else:
+            command_to_send = "list"
+    elif args.command == "stop_daemon":
+        command_to_send = "shutdown" 
+
+    send_command(command_to_send)
+
+if __name__ == "__main__":
+    main()

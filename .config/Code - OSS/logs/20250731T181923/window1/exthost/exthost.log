@@ -1,0 +1,31 @@
+2025-07-31 18:19:28.758 [info] Extension host with pid 3842 started
+2025-07-31 18:19:28.948 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2025-07-31 18:19:29.051 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2025-07-31 18:19:29.059 [info] ExtensionService#_doActivateExtension dlasagno.wal-theme, startup: true, activationEvent: '*'
+2025-07-31 18:19:29.147 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2025-07-31 18:19:29.297 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2025-07-31 18:19:29.598 [info] Eager extensions activated
+2025-07-31 18:19:29.608 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2025-07-31 18:19:29.615 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2025-07-31 18:51:43.126 [info] Extension host terminating: renderer closed the MessagePort
+2025-07-31 18:51:43.145 [info] Extension host with pid 3842 exiting with code 0
+2025-07-31 18:51:46.096 [info] Extension host with pid 8112 started
+2025-07-31 18:51:46.096 [info] Skipping acquiring lock for /home/amine/.config/Code - OSS/User/workspaceStorage/c5b7a4e80d1ebe7c7c5e64c21f7f0fd6.
+2025-07-31 18:51:46.140 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2025-07-31 18:51:46.256 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2025-07-31 18:51:46.262 [info] ExtensionService#_doActivateExtension dlasagno.wal-theme, startup: true, activationEvent: '*'
+2025-07-31 18:51:46.323 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2025-07-31 18:51:46.476 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2025-07-31 18:51:46.807 [info] Eager extensions activated
+2025-07-31 18:51:46.823 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2025-07-31 18:51:46.828 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2025-07-31 18:51:47.198 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:json'
+2025-07-31 18:51:47.222 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:json'
+2025-07-31 18:51:47.256 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:json'
+2025-07-31 18:51:47.405 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onLanguage:json'
+2025-07-31 18:51:52.037 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10019
+2025-07-31 18:51:54.614 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2025-07-31 18:51:55.115 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10020
+2025-07-31 18:53:15.730 [info] ExtensionService#_doActivateExtension vscode.css-language-features, startup: false, activationEvent: 'onLanguage:css'
+2025-07-31 19:04:46.487 [info] Extension host terminating: renderer closed the MessagePort
+2025-07-31 19:04:46.515 [info] Extension host with pid 8112 exiting with code 0

@@ -1,0 +1,13 @@
+
+/* theme created by J O N A T H A N  P. */
+/* My github https://github.com/IamJony */
+
+
+/* Palette Colors */
+
+* {
+  al:   #00000000;
+  bg:   #00000059;
+  fg:   #EAEAEAFF;
+  bd:	#FFFFFF1A;
+}

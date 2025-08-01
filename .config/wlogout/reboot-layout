@@ -1,0 +1,18 @@
+{
+    "label": "reboot-linux",
+    "action": "systemctl reboot",
+    "text": "Reboot to Linux",
+    "keybind": "l"
+}
+{
+    "label": "reboot-windows",
+    "action": "sudo efibootmgr -n 0000 && systemctl reboot",
+    "text": "Reboot to Windows",
+    "keybind": "w"
+}
+{
+    "label": "back",
+    "action": "wlogout -l ~/.config/wlogout/layout",
+    "text": "Back",
+    "keybind": "b"
+}
