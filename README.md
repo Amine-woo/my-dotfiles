@@ -1,12 +1,16 @@
 # Hyprland Dotfiles
 
 This repository contains my personal **Hyprland dotfiles**, including configurations for **Waybar**, **Rofi**, **Kitty**, and various scripts to improve workflow and aesthetics.
+## 🖼ScreenShots:
+<img width="2560" height="992" alt="image" src="https://github.com/user-attachments/assets/82d9d9c1-be25-4cef-a094-717130a336ef" />
+<img width="2560" height="73" alt="image" src="https://github.com/user-attachments/assets/7cbf79fe-a77e-42dd-9661-23cd85f2df9a" />
+<img width="2548" height="1235" alt="image" src="https://github.com/user-attachments/assets/1dba9aa3-9c22-49f3-a1c6-db8b5af319ee" />
 
 ---
 
 ## Features
 
-### 🖼 Wallpapers & Dynamic Themes
+### Wallpapers & Dynamic Themes
 - **`wallpaperdaemon`**  
   - Automatically starts on login.  
   - Launches **mpvpaper** for animated wallpapers.  
