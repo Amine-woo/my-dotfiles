@@ -17,15 +17,15 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
   - Runs **pywal** to generate color schemes applied to **Kitty**, **Waybar**, **Zen Browser**, and **Rofi**.  
 
 - **`wallpaperctl`**  
-  - Switches wallpaper and theme with **SUPER+U**.
+  - Switches wallpaper and theme with **SUPER+U** by default.
 
 ---
 
 ### Waybar Integration
 - **Network management:** `networkmanager-dmenu`
 - **Brightness control:** `brightnessctl`
-- **Power profiles:** `powerprofilesctl`
-- **Session menu:** logout, shutdown, reboot, or reboot to Windows via `wlogout`
+- **Power profiles:** `power-profiles-daemon`
+- **Session menu:** logout, shutdown, reboot, or reboot to Windows (with efibootmgr) via `wlogout`
 
 ---
 
@@ -41,31 +41,16 @@ This repository contains my personal **Hyprland dotfiles**, including configurat
 - Additional scripts for screenshots and various utilities (check the `scripts/` folder).
 
 ---
-### Waybar Controls
+### Extrasw
 
-  - Network: launches networkmanager-dmenu.
-
-  - Brightness: controls brightness via brightnessctl.
-
-  - Power profiles: switch profiles (performance/powersaver).
-
-  - Session: manage logout/shutdown/reboot with wlogout.
-
----
-### Terminal
-
-  - Launch Kitty with zsh + Powerlevel10k, including autocompletions and autosuggestions.
-
----
-### Extra Scripts
-
-  - Includes various utilities (e.g., screenshots). Explore the repository for more.
+  - Includes various utilities. Explore the repository for more.
 
 ---
 ### Credits
 
   Waybar layout inspired by @Rocklinks (Niri config).
-  Wallpaper scripts by @OrigamingWasTaken, who also personally helped me with this setup.
+  
+  Wallpaper scripts and parts of the config by @OrigamingWasTaken, who also personally helped me with this setup.
 
 ---
 ## Installation
