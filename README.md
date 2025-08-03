@@ -3,6 +3,8 @@
 This repository contains my **Hyprland dotfiles** used on **EndeavourOS (Arch Linux)**.  
 It includes my **Waybar configuration**, custom scripts for wallpapers and theming, and my terminal setup with **Zsh + Oh My Zsh + Powerlevel10k + Zoxide**.
 
+⚠ THIS REPO IS A Work In Progress
+
 ---
 ## 📂 Screenshots: 
 <img width="3840" height="72" alt="image" src="https://github.com/user-attachments/assets/443fb6cb-1629-478c-8814-c804e9f8418a" />
@@ -41,4 +43,12 @@ It includes my **Waybar configuration**, custom scripts for wallpapers and themi
 Clone the repository and copy the configuration files to `~/.config`, add the Wallpaper folder to your home directory, add the rofi theme to `.local/rofi/themes` and install the dependencies:
 
 ```bash
-git clone git@github.com:YourUsername/my-dotfiles.git ~/my-dotfiles
+git clone https://github.com/Amine-woo/my-dotfiles.git
+
+cp -r ~/my-dotfiles/Wallpaper ~/
+cp -r ~/my-dotfiles/.config/ ~/.config/
+
+mkdir -p ~/.local/share/rofi/themes
+cp -r ~/my-dotfiles/.local-rofi-themes/* ~/.local/share/rofi/themes/
+
+# install the dependencies
