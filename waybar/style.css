@@ -47,7 +47,10 @@ window#waybar {
 #bluetooth,
 #custom-prev,
 #custom-playpause,
-#custom-next {
+#custom-next,
+#cpu,
+#memory,
+#temperature {
   margin: 4px 4px;
   padding: 4px 8px;
   background: alpha(@background, 0.6);
@@ -78,7 +81,10 @@ window#waybar {
 #bluetooth:hover
 #custom-prev:hover,
 #custom-playpause:hover,
-#custom-next:hover {
+#custom-next:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover{
   background: @color4;
   color: #292c3c;
   border-bottom: 2px solid @color4;

@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/launcher", "hyprland/workspaces","custom/swaync", "custom/prev", "custom/playpause", "custom/next"],
     "modules-center": ["clock","custom/updates"],
-    "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "backlight", "battery", "power-profiles-daemon", "custom/lock" ],
+    "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "backlight", "battery", "cpu","memory","custom/lock" ],
     "niri/workspaces": {
         "format": "{icon}",
         "format-icons": {
