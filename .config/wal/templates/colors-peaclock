@@ -1,0 +1,43 @@
+# peaclock - pywal template config
+
+# General settings remain unchanged
+block 2 1
+padding 0 0
+margin 0 0
+ratio 2 1
+date-padding 1
+fill ''
+locale ''
+timezone ''
+date '%a %b %d'
+mode clock
+view digital
+toggle active-bg
+stopwatch start
+timer 10m:0s
+timer-exec 'notify-send -a peaclock "timer complete"'
+rate-input 50
+rate-refresh 1000
+rate-status 5000
+
+# Toggles
+set hour-24 on
+set seconds off
+set date on
+set auto-size on
+set auto-ratio on
+
+# Styles (using pywal variables)
+# These variables will be replaced by pywal with colors from your wallpaper
+style active-fg {color5}
+style inactive-fg {color4}
+style colon-fg {color6}
+style active-bg reverse
+style inactive-bg clear
+style colon-bg clear
+style date {color2}
+style background {background}
+style text {foreground}
+style prompt {color1}
+style success {color2}
+style error {color1}

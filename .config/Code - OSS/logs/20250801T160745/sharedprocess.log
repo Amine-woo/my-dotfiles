@@ -1,0 +1,6 @@
+2025-08-01 16:09:23.563 [info] Getting Manifest... dlasagno.wal-theme
+2025-08-01 16:09:24.357 [info] Installing extension: dlasagno.wal-theme {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/amine/.vscode-oss/extensions/extensions.json","path":"/home/amine/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"isApplicationScoped":false,"productVersion":{"version":"1.102.3","date":"2025-07-30T06:01:06.159Z"}}
+2025-08-01 16:09:26.019 [info] Extension signature verification result for dlasagno.wal-theme: Success. Executed: true. Duration: 1090ms.
+2025-08-01 16:09:26.062 [info] Extracted extension to file:///home/amine/.vscode-oss/extensions/dlasagno.wal-theme-1.1.2-universal: dlasagno.wal-theme
+2025-08-01 16:09:26.066 [info] Renamed to /home/amine/.vscode-oss/extensions/dlasagno.wal-theme-1.1.2-universal
+2025-08-01 16:09:26.076 [info] Extension installed successfully: dlasagno.wal-theme vscode-userdata:/home/amine/.vscode-oss/extensions/extensions.json

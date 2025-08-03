@@ -1,0 +1,31 @@
+2025-07-31 20:28:31.127 [info] [main] Log level: Info
+2025-07-31 20:28:31.127 [info] [main] Validating found git in: "git"
+2025-07-31 20:28:31.127 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 20:28:31.127 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 20:28:31.127 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2025-07-31 20:28:34.125 [info] > git rev-parse --show-toplevel [1ms]
+2025-07-31 20:28:34.129 [info] > git rev-parse --git-dir --git-common-dir [1ms]
+2025-07-31 20:28:34.134 [info] [Model][openRepository] Opened repository (path): /home/amine
+2025-07-31 20:28:34.134 [info] [Model][openRepository] Opened repository (real path): /home/amine
+2025-07-31 20:28:34.141 [info] > git config --get commit.template [2ms]
+2025-07-31 20:28:34.148 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [2ms]
+2025-07-31 20:28:34.152 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 20:28:34.153 [info] > git rev-parse refs/remotes/origin/main [1ms]
+2025-07-31 20:28:34.163 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [2ms]
+2025-07-31 20:28:34.377 [info] > git status -z -uall [220ms] (cancelled)
+2025-07-31 20:28:34.378 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [6ms]
+2025-07-31 20:28:34.383 [info] > git config --get --local branch.main.vscode-merge-base [2ms]
+2025-07-31 20:28:34.387 [info] > git config --get commit.template [10ms]
+2025-07-31 20:28:34.388 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [1ms]
+2025-07-31 20:28:34.424 [info] > git merge-base refs/heads/main refs/remotes/origin/main [32ms]
+2025-07-31 20:28:34.892 [info] > git diff --name-status -z --diff-filter=ADMR d5122ef9e13aed9bd6644faaebee40cd7041c707...refs/remotes/origin/main [464ms]
+2025-07-31 20:28:34.893 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [479ms]
+2025-07-31 20:28:34.902 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 20:28:34.902 [info] > git check-ignore -v -z --stdin [5ms]
+2025-07-31 20:28:34.902 [info] > git rev-parse refs/remotes/origin/main [0ms]
+2025-07-31 20:28:34.909 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [1ms]
+2025-07-31 20:28:34.988 [info] > git status -z -uall [83ms] (cancelled)
+2025-07-31 20:28:34.997 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [3ms]
+2025-07-31 20:28:34.998 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [1ms]
+2025-07-31 20:28:35.003 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [1ms]
+2025-07-31 20:28:36.745 [info] > git blame --root --incremental d5122ef9e13aed9bd6644faaebee40cd7041c707 -- .local/rofi/themes/spotlight-dark.rasi [1ms]

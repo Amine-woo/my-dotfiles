@@ -1,0 +1,65 @@
+2025-07-31 16:58:51.602 [info] [main] Log level: Info
+2025-07-31 16:58:51.602 [info] [main] Validating found git in: "git"
+2025-07-31 16:58:51.602 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 16:58:51.602 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 16:58:51.602 [info] > git rev-parse --show-toplevel [15ms]
+2025-07-31 16:58:51.602 [info] > git rev-parse --git-dir --git-common-dir [11ms]
+2025-07-31 16:58:51.602 [info] [Model][openRepository] Opened repository (path): /home/amine/dotfiles/waybar2/Hyprland-Waybar-Dots
+2025-07-31 16:58:51.602 [info] [Model][openRepository] Opened repository (real path): /home/amine/dotfiles/waybar2/Hyprland-Waybar-Dots
+2025-07-31 16:58:51.602 [info] [Model][doInitialScan] Initial repository scan completed - repositories (1), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2025-07-31 16:58:51.602 [info] > git config --get commit.template [13ms]
+2025-07-31 16:58:51.602 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [32ms]
+2025-07-31 16:58:51.613 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/dotfiles/waybar2/Hyprland-Waybar-Dots/.git/refs/remotes/origin/main'
+2025-07-31 16:58:51.681 [info] > git rev-parse refs/remotes/origin/main [68ms]
+2025-07-31 16:58:51.723 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [14ms]
+2025-07-31 16:58:52.047 [info] > git show --textconv :.config/waybar/config.jsonc [15ms]
+2025-07-31 16:58:52.057 [info] > git ls-files --stage -- .config/waybar/config.jsonc [12ms]
+2025-07-31 16:58:52.086 [info] > git check-ignore -v -z --stdin [4ms]
+2025-07-31 16:58:52.088 [info] > git cat-file -s 58141f25f6987e9c54f030cbc34c01bccf605620 [19ms]
+2025-07-31 16:58:52.120 [info] > git status -z -uall [426ms]
+2025-07-31 16:58:52.191 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [16ms]
+2025-07-31 16:58:52.207 [info] > git config --get --local branch.main.vscode-merge-base [3ms]
+2025-07-31 16:58:52.220 [info] > git config --get commit.template [30ms]
+2025-07-31 16:58:52.225 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [6ms]
+2025-07-31 16:58:52.258 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [5ms]
+2025-07-31 16:58:52.259 [info] > git merge-base refs/heads/main refs/remotes/origin/main [20ms]
+2025-07-31 16:58:52.287 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/dotfiles/waybar2/Hyprland-Waybar-Dots/.git/refs/remotes/origin/main'
+2025-07-31 16:58:52.288 [info] > git diff --name-status -z --diff-filter=ADMR c6e3919f1cc8f8a340705cee25f78d5ef43e0cdc...refs/remotes/origin/main [16ms]
+2025-07-31 16:58:52.291 [info] > git rev-parse refs/remotes/origin/main [4ms]
+2025-07-31 16:58:52.319 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [4ms]
+2025-07-31 16:58:52.667 [info] > git status -z -uall [366ms]
+2025-07-31 16:58:53.044 [info] > git show --textconv :.config/waybar/style.css [26ms]
+2025-07-31 16:58:53.044 [info] > git ls-files --stage -- .config/waybar/style.css [15ms]
+2025-07-31 16:58:53.062 [info] > git cat-file -s d737e8a2b72c7d260058cc8523cecde974b3b0b7 [5ms]
+2025-07-31 16:59:33.139 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 16:59:34.943 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 16:59:38.458 [info] > git rev-parse --show-toplevel [6ms]
+2025-07-31 16:59:56.585 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:00:01.951 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 17:00:09.119 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:04:57.662 [info] [main] Log level: Info
+2025-07-31 17:04:57.662 [info] [main] Validating found git in: "git"
+2025-07-31 17:04:57.662 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 17:04:57.662 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 17:04:57.662 [info] > git rev-parse --show-toplevel [54ms]
+2025-07-31 17:04:57.677 [info] > git rev-parse --show-toplevel [16ms]
+2025-07-31 17:04:57.685 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (1), unsafe repositories (0)
+2025-07-31 17:05:00.404 [info] > git rev-parse --show-toplevel [5ms]
+2025-07-31 17:05:19.787 [info] > git rev-parse --show-toplevel [2ms]
+2025-07-31 17:14:40.091 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:15:18.046 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 17:16:49.969 [info] > git rev-parse --show-toplevel [5ms]
+2025-07-31 17:16:51.887 [info] > git rev-parse --show-toplevel [7ms]
+2025-07-31 17:16:54.187 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:16:57.578 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 17:17:37.928 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:18:08.488 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:18:14.856 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:18:24.419 [info] > git rev-parse --show-toplevel [4ms]
+2025-07-31 17:18:29.487 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:27:55.841 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:27:56.351 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:28:27.921 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:40:54.601 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:41:16.072 [info] > git rev-parse --show-toplevel [3ms]
+2025-07-31 17:47:45.391 [info] > git rev-parse --show-toplevel [4ms]

@@ -1,0 +1,83 @@
+{
+    "telemetry.sqmId": "",
+    "telemetry.machineId": "f9ba71281087b8554da1703803ec1f19aa23ba5afce7fd1cbcd8addb208e2e7e",
+    "telemetry.devDeviceId": "3e040571-d762-4c81-a4f1-7393ada0612f",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [
+            {
+                "folderUri": "file:///home/amine/.config/waybar"
+            }
+        ],
+        "emptyWindows": [
+            {
+                "backupFolder": "1754079632714"
+            }
+        ]
+    },
+    "windowControlHeight": 60,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///home/amine/.config/waybar": "__default__profile__"
+        },
+        "emptyWindows": {
+            "1754079632714": "__default__profile__"
+        }
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "backupPath": "/home/amine/.config/Code - OSS/Backups/1754079632714",
+            "uiState": {
+                "mode": 1,
+                "x": 1296,
+                "y": 94,
+                "width": 1232,
+                "height": 1473,
+                "zoomLevel": 3
+            }
+        },
+        "openedWindows": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#0f1f24",
+    "windowSplash": {
+        "zoomLevel": 0,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "rgba(195, 199, 200, 0.6)",
+            "background": "#0f1f24",
+            "editorBackground": "#0f1f24",
+            "titleBarBackground": "#0f1f24",
+            "titleBarBorder": "#0f1f24",
+            "activityBarBackground": "#0f1f24",
+            "activityBarBorder": "#0f1f24",
+            "sideBarBackground": "#0f1f24",
+            "sideBarBorder": "#0f1f24",
+            "statusBarBackground": "#0f1f24",
+            "statusBarBorder": "#0f1f24",
+            "statusBarNoFolderBackground": "#12252b"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 35,
+            "activityBarWidth": 48,
+            "sideBarWidth": 0,
+            "auxiliaryBarWidth": 0,
+            "statusBarHeight": 22,
+            "windowBorder": false
+        }
+    },
+    "windowSplashWorkspaceOverride": {
+        "layoutInfo": {
+            "sideBarWidth": 170,
+            "auxiliaryBarWidth": 300,
+            "workspaces": {
+                "c5b7a4e80d1ebe7c7c5e64c21f7f0fd6": {
+                    "sideBarVisible": false,
+                    "auxiliaryBarVisible": false
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+2025-08-01 16:07:48.527 [info] Started local extension host with pid 9878.
+2025-08-01 16:07:48.546 [info] Started initializing default profile extensions in extensions installation folder. file:///home/amine/.vscode-oss/extensions
+2025-08-01 16:07:48.685 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/amine/.vscode-oss/extensions
+2025-08-01 16:07:51.519 [info] [perf] Render performance baseline is 24ms
+2025-08-01 16:13:22.633 [error] lock() request could not be registered.: InvalidStateError: lock() request could not be registered.

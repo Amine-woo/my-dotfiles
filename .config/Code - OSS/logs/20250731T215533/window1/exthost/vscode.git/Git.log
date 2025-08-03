@@ -1,0 +1,54 @@
+2025-07-31 21:55:34.341 [info] [main] Log level: Info
+2025-07-31 21:55:34.341 [info] [main] Validating found git in: "git"
+2025-07-31 21:55:34.341 [info] [main] Using git "2.50.1" from "git"
+2025-07-31 21:55:34.341 [info] [Model][doInitialScan] Initial repository scan started
+2025-07-31 21:55:34.341 [info] > git rev-parse --show-toplevel [2ms]
+2025-07-31 21:55:34.341 [info] > git rev-parse --git-dir --git-common-dir [4ms]
+2025-07-31 21:55:34.341 [info] [Model][openRepository] Opened repository (path): /home/amine
+2025-07-31 21:55:34.341 [info] [Model][openRepository] Opened repository (real path): /home/amine
+2025-07-31 21:55:34.341 [info] [Model][doInitialScan] Initial repository scan completed - repositories (1), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2025-07-31 21:55:34.341 [info] > git config --get commit.template [1ms]
+2025-07-31 21:55:34.341 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [3ms]
+2025-07-31 21:55:34.341 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 21:55:34.341 [info] > git rev-parse refs/remotes/origin/main [5ms]
+2025-07-31 21:55:34.365 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [17ms]
+2025-07-31 21:55:34.580 [info] > git status -z -uall [235ms] (cancelled)
+2025-07-31 21:55:34.582 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [4ms]
+2025-07-31 21:55:34.590 [info] > git config --get --local branch.main.vscode-merge-base [3ms]
+2025-07-31 21:55:34.594 [info] > git config --get commit.template [12ms]
+2025-07-31 21:55:34.605 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [7ms]
+2025-07-31 21:55:34.605 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [11ms]
+2025-07-31 21:55:34.612 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/amine/.git/refs/remotes/origin/main'
+2025-07-31 21:55:34.613 [info] > git merge-base refs/heads/main refs/remotes/origin/main [4ms]
+2025-07-31 21:55:34.616 [info] > git rev-parse refs/remotes/origin/main [4ms]
+2025-07-31 21:55:34.624 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [1ms]
+2025-07-31 21:55:34.625 [info] > git diff --name-status -z --diff-filter=ADMR d5122ef9e13aed9bd6644faaebee40cd7041c707...refs/remotes/origin/main [10ms]
+2025-07-31 21:55:35.104 [info] > git show --textconv :.config/rofi/config.rasi [8ms]
+2025-07-31 21:55:35.104 [info] > git ls-files --stage -- .config/rofi/config.rasi [2ms]
+2025-07-31 21:55:35.114 [info] > git status -z -uall [496ms] (cancelled)
+2025-07-31 21:55:35.114 [info] > git check-ignore -v -z --stdin [3ms]
+2025-07-31 21:55:35.114 [info] > git cat-file -s 572c56acdcc3b2ef09bfdbfdb67f141deb6ea18e [7ms]
+2025-07-31 21:55:39.746 [info] > git blame --root --incremental d5122ef9e13aed9bd6644faaebee40cd7041c707 -- .config/rofi/config.rasi [2ms]
+2025-07-31 21:55:44.410 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [4ms]
+2025-07-31 21:55:44.411 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [1ms]
+2025-07-31 21:55:44.416 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [1ms]
+2025-07-31 21:55:44.726 [info] > git check-ignore -v -z --stdin [1ms]
+2025-07-31 21:56:13.243 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [2ms]
+2025-07-31 21:56:13.249 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [1ms]
+2025-07-31 21:56:13.254 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [1ms]
+2025-07-31 22:02:32.463 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [0ms]
+2025-07-31 22:02:32.470 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [1ms]
+2025-07-31 22:02:32.475 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [1ms]
+2025-07-31 22:03:04.305 [info] > git blame --root --incremental d5122ef9e13aed9bd6644faaebee40cd7041c707 -- .local/rofi/themes/spotlight-dark.rasi [1ms]
+2025-07-31 22:04:38.465 [info] > git show --textconv :.config/rofi/config.rasi [4ms]
+2025-07-31 22:04:38.466 [info] > git ls-files --stage -- .config/rofi/config.rasi [1ms]
+2025-07-31 22:04:38.469 [info] > git cat-file -s 572c56acdcc3b2ef09bfdbfdb67f141deb6ea18e [0ms]
+2025-07-31 22:10:42.230 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [17ms]
+2025-07-31 22:10:42.232 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [3ms]
+2025-07-31 22:10:42.252 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [4ms]
+2025-07-31 22:10:47.809 [info] > git show --textconv :.config/rofi/config.rasi [13ms]
+2025-07-31 22:10:47.812 [info] > git ls-files --stage -- .config/rofi/config.rasi [4ms]
+2025-07-31 22:10:47.827 [info] > git cat-file -s 572c56acdcc3b2ef09bfdbfdb67f141deb6ea18e [4ms]
+2025-07-31 22:11:08.118 [info] > git show --textconv :.local/rofi/themes/spotlight-dark.rasi [14ms]
+2025-07-31 22:11:08.120 [info] > git ls-files --stage -- .local/rofi/themes/spotlight-dark.rasi [4ms]
+2025-07-31 22:11:08.136 [info] > git cat-file -s a9b9c2056637b1c23eaeca2e8fbcf58edfcfa0c9 [4ms]
