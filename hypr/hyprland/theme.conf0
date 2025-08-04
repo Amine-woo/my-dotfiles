@@ -1,4 +1,4 @@
-source = ~/.cache/wal/colors-hyprland
+source = ~/.config/hypr/hyprland/colors
 
 # Vibrancy apps variable and window rule
 $vibrancy_apps = ^(dev.zed.Zed|firefox|org.kde.dolphin|org.pulseaudio.pavucontrol|discord|page.kramo.Cartridges|code-oss)$

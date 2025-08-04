@@ -2,10 +2,10 @@
 
 * {
   font-family: "JetbrainsMono Nerd Font";
-  font-size: 12px;
+  font-size: 16px;
   border: none;
   border-radius: 6px;
-  min-height: 0px;
+  min-height: 25px;
 }
 
 window#waybar {
@@ -78,7 +78,7 @@ window#waybar {
 #custom-updates:hover,
 #tray:hover,
 #custom-power:hover,
-#bluetooth:hover
+#bluetooth:hover,
 #custom-prev:hover,
 #custom-playpause:hover,
 #custom-next:hover,
@@ -149,9 +149,11 @@ window#waybar {
   border-radius: 6px;
   border: none;
 }
+
 #custom-prev {
-  margin-left: 12px; /* espace entre les workspaces et les boutons */
+  margin-left: 16px; /* espace entre les workspaces et les boutons */
 }
+
 * {
   font-family: "JetBrainsMono Nerd Font";
 }

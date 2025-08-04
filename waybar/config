@@ -50,11 +50,13 @@
  
     "bluetooth": {
 	"controller": "blueberry",
-	"format": "",
-	"format-disabled": "",
-	"format-off": " off",
+	"format": "",
+	"format-disabled": "󰂲",
+	"format-off": "󰂲 off",
 	"on-click": "blueberry",
+    "tooltip": true,
 	"on-click-right": "blueberry"
+    
     },
     
   "custom/swaync": {
@@ -152,19 +154,30 @@
     },      
     "custom/prev": {
         "format": "⏮",
-        "on-click": "playerctl --player=playerctld previous"
+        "on-click": "playerctl --player=playerctld previous",
+        "tooltip": false
 },
     "custom/playpause": {
         "exec": "playerctl --player=playerctld status 2>/dev/null | grep -q Playing && echo '' || echo ''",
         "interval": 1,
         "return-type": "text",
-        "on-click": "playerctl --player=playerctld play-pause"
+        "on-click": "playerctl --player=playerctld play-pause",
+        "tooltip": false
 },
     "custom/next": {
         "format": "⏭",
-        "on-click": "playerctl --player=playerctld next"
-}
+        "on-click": "playerctl --player=playerctld next",
+        "tooltip": false
+},
 
+"cpu": {
+  "format": " {usage}%",
+  "tooltip": true
+},
+"memory": {
+  "format": "󱩶 {percentage}%",
+  "tooltip": true
+}
 
 
 }

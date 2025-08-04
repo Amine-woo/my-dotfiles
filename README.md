@@ -37,6 +37,11 @@ It includes my **Waybar configuration**, custom scripts for wallpapers and themi
   - [zoxide](https://github.com/ajeetdsouza/zoxide)
 
 ---
+## ©️ Credits
+
+- Waybar inspired by [@sansroot](https://github.com/sansroot/hypr-dots?tab=readme-ov-file)
+- Thanks to [@OrigamingWasTaken](https://github.com/OrigamingWasTaken) for the wallpaper scripts and personally helping me with the rice!
+---
 
 ## 🚀 Installation
 
