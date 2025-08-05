@@ -6,9 +6,13 @@ It includes my **Waybar configuration**, custom scripts for wallpapers and themi
 ⚠ THIS REPO IS A Work In Progress
 
 ---
+
+## 👀 Showcase:
+https://github.com/user-attachments/assets/39833267-8d45-44f9-b05c-4dd73c99e5a1
+
 ## 📂 Screenshots: 
 <img width="3840" height="72" alt="image" src="https://github.com/user-attachments/assets/443fb6cb-1629-478c-8814-c804e9f8418a" />
-<img width="2259" height="948" alt="image" src="https://github.com/user-attachments/assets/7a5d3b35-bbf1-497a-930d-f101999d85eb" />
+
 <img width="3394" height="1674" alt="image" src="https://github.com/user-attachments/assets/42673556-de6b-4cf1-b8b9-7e948f663767" />
 <img width="3840" height="1444" alt="image" src="https://github.com/user-attachments/assets/bef333f8-d005-4a9a-85c2-1f6bfdf6b63d" />
 <img width="3370" height="1632" alt="image" src="https://github.com/user-attachments/assets/602ca205-2d6f-45f5-9b45-f48b3dd545d2" />
@@ -35,6 +39,11 @@ It includes my **Waybar configuration**, custom scripts for wallpapers and themi
   - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
   - [zsh-completions](https://github.com/zsh-users/zsh-completions)
   - [zoxide](https://github.com/ajeetdsouza/zoxide)
+
+### 🔹 Discord TUI Pywal Theme:
+- **What it does ?** Basically I made a script stored in ~/.config/vesktop/themes/theme.sh that updates [@refract0r](https://github.com/refact0r/system24) 's system24 theme to have the same colors as my theme (changes automatically as soon as I change wallpapers) !
+<img width="3840" height="2160" alt="image" src="https://github.com/user-attachments/assets/a5247948-d531-46f1-8edc-3503a4125b8d" />
+
 
 ---
 ## ©️ Credits
