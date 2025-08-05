@@ -1,0 +1,99 @@
+/**
+ * @name Pywal-Discord-WaybarStyle
+ * @description Inspired by pywal + waybar minimalism
+ */
+
+:root {
+  --wallpaper: url("/tmp/wallpaper_current_frame.png");
+
+  /* Main colors from wal */
+  --main-bg: var(--color0);
+  --main-fg: var(--color7);
+  --main-accent: var(--color4);
+
+  /* Fallbacks */
+  --background: var(--main-bg);
+  --foreground: var(--main-fg);
+
+  --cursor: var(--main-fg);
+
+  /* Light/dark backgrounds */
+  --lightbg: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), var(--main-bg);
+  --darkbg: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), var(--main-bg);
+
+  --bdfdb-blurple: var(--main-accent);
+}
+
+.theme-dark {
+  --background-primary: var(--main-bg);
+  --background-secondary: var(--main-bg);
+  --background-tertiary: var(--main-bg);
+  --background-accent: var(--main-bg);
+  --background-floating: var(--main-bg);
+  --background-mobile-primary: var(--main-bg);
+  --background-mobile-secondary: var(--color1);
+
+  --background-modifier-hover: rgba(255,255,255,0.05);
+  --background-modifier-active: rgba(255,255,255,0.1);
+  --background-modifier-selected: rgba(255,255,255,0.15);
+  --background-modifier-accent: var(--main-accent);
+
+  --header-primary: var(--main-fg);
+  --header-secondary: var(--main-fg);
+  --text-normal: var(--main-fg);
+  --text-muted: var(--color8);
+  --text-link: var(--main-accent);
+
+  --interactive-normal: var(--main-fg);
+  --interactive-hover: var(--main-accent);
+  --interactive-active: var(--main-accent);
+  --interactive-muted: var(--color8);
+
+  --channels-default: var(--main-fg);
+  --channeltextarea-background: var(--color1);
+
+  --scrollbar-thin-thumb: var(--main-accent);
+  --scrollbar-auto-thumb: var(--main-accent);
+  --scrollbar-auto-track: rgba(255, 255, 255, 0.06);
+
+  --brand-experiment: var(--main-accent);
+  --brand-experiment-100: var(--main-accent);
+  --brand-experiment-200: var(--main-accent);
+  --brand-experiment-300: var(--main-accent);
+  --brand-experiment-400: var(--main-accent);
+  --brand-experiment-500: var(--main-accent);
+  --brand-experiment-600: var(--main-accent);
+  --brand-experiment-700: var(--main-accent);
+  --brand-experiment-800: var(--main-accent);
+  --brand-experiment-900: var(--main-accent);
+
+  --logo-primary: #fff;
+  --elevation-low: 0 1px 0 rgba(4, 4, 5, 0.2);
+  --elevation-medium: 0 4px 4px rgba(0, 0, 0, 0.16);
+  --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
+}
+
+/* Light theme override just in case */
+.theme-light {
+  --background-primary: var(--main-bg);
+  --background-secondary: var(--main-bg);
+  --background-tertiary: var(--main-bg);
+  --text-normal: var(--main-fg);
+  --text-muted: var(--color8);
+  --interactive-hover: var(--main-accent);
+  --interactive-active: var(--main-accent);
+  --interactive-muted: var(--color8);
+  --channeltextarea-background: var(--color1);
+}
+
+/* Minimal tweaks */
+html,
+body,
+.appMount-3lHmkl {
+  background-color: var(--background-primary) !important;
+  color: var(--text-normal) !important;
+}
+
+a {
+  color: var(--text-link);
+}

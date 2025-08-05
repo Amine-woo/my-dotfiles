@@ -1,0 +1,6 @@
+2025/08/05-18:41:41.548 1e41a Creating DB /home/amine/.config/vesktop/sessionData/WebStorage/2/IndexedDB/indexeddb.leveldb since it was missing.
+2025/08/05-18:41:41.560 1e41a Reusing MANIFEST /home/amine/.config/vesktop/sessionData/WebStorage/2/IndexedDB/indexeddb.leveldb/MANIFEST-000001
+2025/08/05-18:49:18.415 1e3af Level-0 table #5: started
+2025/08/05-18:49:18.422 1e3af Level-0 table #5: 12937 bytes OK
+2025/08/05-18:49:18.431 1e3af Delete type=0 #3
+2025/08/05-18:49:18.432 1e3af Manual compaction at level-0 from (begin) .. (end); will stop at (end)

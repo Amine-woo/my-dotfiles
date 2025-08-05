@@ -1,0 +1,27 @@
+2025/08/05-20:07:17.296 3b7b1 Reusing MANIFEST /home/amine/.config/vesktop/sessionData/Local Storage/leveldb/MANIFEST-000001
+2025/08/05-20:07:17.303 3b7b1 Recovering log #160
+2025/08/05-20:07:17.303 3b7b1 Reusing old log /home/amine/.config/vesktop/sessionData/Local Storage/leveldb/000160.log 
+2025/08/05-20:08:17.307 3b7b2 Level-0 table #165: started
+2025/08/05-20:08:17.322 3b7b2 Level-0 table #165: 71976 bytes OK
+2025/08/05-20:08:17.337 3b7b2 Delete type=0 #160
+2025/08/05-20:23:45.125 3b7b2 Level-0 table #167: started
+2025/08/05-20:23:45.140 3b7b2 Level-0 table #167: 74011 bytes OK
+2025/08/05-20:23:45.147 3b7b2 Delete type=0 #164
+2025/08/05-20:37:19.613 3b7b2 Level-0 table #169: started
+2025/08/05-20:37:19.628 3b7b2 Level-0 table #169: 68025 bytes OK
+2025/08/05-20:37:19.648 3b7b2 Delete type=0 #166
+2025/08/05-20:43:19.023 3b7b2 Level-0 table #171: started
+2025/08/05-20:43:19.038 3b7b2 Level-0 table #171: 68210 bytes OK
+2025/08/05-20:43:19.045 3b7b2 Delete type=0 #168
+2025/08/05-20:43:19.045 3b7b2 Compacting 4@0 + 1@1 files
+2025/08/05-20:43:19.057 3b7b2 Generated table #172@0: 72 keys, 125216 bytes
+2025/08/05-20:43:19.057 3b7b2 Compacted 4@0 + 1@1 files => 125216 bytes
+2025/08/05-20:43:19.063 3b7b2 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/08/05-20:43:19.064 3b7b2 Delete type=2 #162
+2025/08/05-20:43:19.064 3b7b2 Delete type=2 #171
+2025/08/05-20:43:19.064 3b7b2 Delete type=2 #169
+2025/08/05-20:43:19.064 3b7b2 Delete type=2 #167
+2025/08/05-20:43:19.064 3b7b2 Delete type=2 #165
+2025/08/05-21:00:50.556 3b7b2 Level-0 table #174: started
+2025/08/05-21:00:50.572 3b7b2 Level-0 table #174: 69434 bytes OK
+2025/08/05-21:00:50.579 3b7b2 Delete type=0 #170
