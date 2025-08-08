@@ -2,10 +2,10 @@
 
 * {
   font-family: "JetbrainsMono Nerd Font";
-  font-size: 16px;
+  font-size: 12px;
   border: none;
   border-radius: 6px;
-  min-height: 25px;
+  min-height: 0px;
 }
 
 window#waybar {
@@ -49,8 +49,7 @@ window#waybar {
 #custom-playpause,
 #custom-next,
 #cpu,
-#memory,
-#temperature {
+#memory {
   margin: 4px 4px;
   padding: 4px 8px;
   background: alpha(@background, 0.6);
@@ -78,13 +77,12 @@ window#waybar {
 #custom-updates:hover,
 #tray:hover,
 #custom-power:hover,
-#bluetooth:hover,
+#bluetooth:hover
 #custom-prev:hover,
 #custom-playpause:hover,
 #custom-next:hover,
 #cpu:hover,
-#memory:hover,
-#temperature:hover{
+#temperature:hover {
   background: @color4;
   color: #292c3c;
   border-bottom: 2px solid @color4;
@@ -142,6 +140,7 @@ window#waybar {
   text-shadow: 0 0 1.5px rgba(0,0,0,0.5);
 }
 
+
 /* Tray menu */
 #tray menu {
   background: alpha(@background, 0.6);
@@ -149,11 +148,9 @@ window#waybar {
   border-radius: 6px;
   border: none;
 }
-
 #custom-prev {
-  margin-left: 16px; /* espace entre les workspaces et les boutons */
+  margin-left: 12px; /* espace entre les workspaces et les boutons */
 }
-
 * {
   font-family: "JetBrainsMono Nerd Font";
 }
