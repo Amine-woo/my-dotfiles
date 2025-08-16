@@ -1,0 +1,191 @@
+{
+    "layer": "top",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": [
+        "custom/notification",
+        "custom/clock",
+        "custom/pacman",
+	"custom/spotify",
+        "tray"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "temperature",
+        "network",
+        "pulseaudio",
+        "custom/dunst",
+        "custom/power"
+    ],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "empty": ""
+        },
+        "persistent-workspaces": {
+            "*": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        }
+    },
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": " Muted",
+      "format-icons": {
+        "default": ["\uf026", "\uf027", "\uf028"]
+      },
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "pavucontrol",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+      "scroll-step": 5
+    },
+    "custom/spotify": {
+	"format": " {text}",
+	"max-length": 40,
+	"interval": 30, // Remove this if your script is endless and write in loop
+	"exec": "python $HOME/.config/waybar/scripts/mediaplayer.py --player spotifyd", // Script in resources folder
+	"exec-if": "pgrep spotifyd",
+	"return-type": "json"
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "",
+        "on-click": "rofi -show drun",
+        "escape": true
+    },
+    "custom/clock": {
+        "exec": "~/.config/waybar/date.sh",
+        "interval": 1,
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": "{tooltip}"
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
+        "tooltip-format": "{ordinal_date} %B %Y"
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "tooltip-format-disconnected": "Error",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} 🖧 ",
+        "on-click": "kitty impala"
+    },
+    "custom/power": {
+        "tooltip": false,
+        "format": " 󰐥 ",
+        "on-click": "wlogout",
+        "escape": true
+    },
+    "bluetooth": {
+        "format-on": "󰂯",
+        "format-off": "BT-off",
+        "format-disabled": "󰂲",
+        "format-connected-battery": "{device_battery_percentage}% 󰂯",
+        "format-alt": "{device_alias} 󰂯",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+        "on-click-right": "blueman-manager"
+    },
+    "battery": {
+        "interval": 30,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% 󰂄 ",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰁻",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰂂",
+            "󰁹"
+        ]
+    },
+    "custom/pacman": {
+        "format": "󰅢 {}",
+        "interval": 30,
+        "exec": "checkupdates | wc -l",
+        "exec-if": "command -v checkupdates",
+        "signal": 8,
+        "tooltip": false
+    },
+    "custom/expand": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/endpoint": {
+        "format": "|",
+        "tooltip": false
+    },
+    "group/expand": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 600,
+            "transition-to-left": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "custom/expand",
+            "custom/colorpicker",
+            "cpu",
+            "memory",
+            "temperature",
+            "custom/endpoint"
+        ]
+    },
+    "custom/colorpicker": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": "once",
+        "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
+        "on-click": "~/.config/waybar/scripts/colorpicker.sh",
+        "signal": 1
+    },
+    "cpu": {
+        "format": "󰻠",
+        "tooltip": true
+    },
+    "memory": {
+        "format": "",
+	"on-click": "flatpak run net.nokyan.Resources"
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": ""
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "custom/dunst": {
+        "exec": "~/.config/waybar/dunst_toggle.sh",
+        "interval": 2,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "~/.config/waybar/dunst_toggle.sh toggle; pkill -RTMIN+10 waybar",
+        "signal": 10
+    }
+}

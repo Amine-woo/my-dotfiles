@@ -1,0 +1,159 @@
+@import url("../../.cache/wal/colors-waybar.css");
+
+* {
+  font-family: "JetbrainsMono Nerd Font";
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  min-height: 10px;
+}
+
+window#waybar {
+  margin: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+  border-bottom: 2px solid @color4;
+}
+
+/* Modules style */
+#network,
+#cava,
+#battery,
+#backlight,
+#language,
+#pulseaudio,
+#clock,
+#disk,
+#privacy,
+#idle_inhibitor,
+#memory,
+#cpu,
+#power-profiles-daemon,
+#custom-swaync,
+#custom-launcher,
+#custom-lock,
+#custom-updates,
+#tray,
+#custom-power,
+#bluetooth,
+#custom-prev,
+#custom-playpause,
+#custom-next,
+#cpu,
+#memory {
+  margin: 4px 4px;
+  padding: 4px 8px;
+  background: alpha(@background, 0.6);
+  color: @color4;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+#network:hover,
+#cava:hover,
+#battery:hover,
+#backlight:hover,
+#language:hover,
+#pulseaudio:hover,
+#clock:hover,
+#disk:hover,
+#privacy:hover,
+#idle_inhibitor:hover,
+#memory:hover,
+#cpu:hover,
+#power-profiles-daemon:hover,
+#custom-swaync:hover,
+#custom-launcher:hover,
+#custom-lock:hover,
+#custom-updates:hover,
+#tray:hover,
+#custom-power:hover,
+#bluetooth:hover
+#custom-prev:hover,
+#custom-playpause:hover,
+#custom-next:hover,
+#cpu:hover,
+#memory:hover {
+  background: @color4;
+  color: #292c3c;
+  border-bottom: 2px solid @color4;
+}
+
+/* Exceptions: muted and disconnected */
+#pulseaudio.muted,
+#network.disconnected {
+  color: #f38ba8;
+  background: alpha(@background, 0.6);
+  border: none;
+}
+
+#pulseaudio.muted:hover,
+#network.disconnected:hover {
+  background: #f38ba8;
+  color: #292c3c;
+}
+
+/* Workspaces */
+#workspaces {
+  margin: 4px;
+  padding-right: 4px;
+  background: alpha(@background, 0.6);
+  color: @color4;
+  transition: 0.2s;
+}
+
+#workspaces button {
+  all: unset;
+  padding: 0 5px;
+  color: @color4;
+  background: alpha(@background, 0.6);
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+#workspaces button:hover {
+  background: alpha(@color4, 0.2);
+  color: @color4;
+}
+
+#workspaces button.active {
+  color: @color4;
+  text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+#workspaces button.empty {
+  color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 1.5px rgba(0,0,0,0.2);
+}
+
+#workspaces button.empty:hover {
+  color: transparent;
+  text-shadow: 0 0 1.5px rgba(0,0,0,0.5);
+}
+
+
+/* Tray menu */
+#tray menu {
+  background: alpha(@background, 0.6);
+  color: @color4;
+  border-radius: 6px;
+  border: none;
+}
+#custom-prev {
+  margin-left: 12px; /* espace entre les workspaces et les boutons */
+}
+* {
+  font-family: "JetBrainsMono Nerd Font";
+}
+

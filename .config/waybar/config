@@ -1,0 +1,156 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/launcher", "hyprland/workspaces","custom/swaync", "custom/prev", "custom/playpause", "custom/next"],
+    "modules-center": ["clock","custom/updates"],
+    "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "backlight", "battery", "power-profiles-daemon","cpu","memory", "custom/lock" ],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+         },
+     },
+    "tray": {
+        "icon-size": 24,
+        "spacing": 2
+    },
+    "custom/launcher":{
+        "format": " ",
+        "on-click": "rofi -show drun",
+        "on-click-right": "killall rofi",
+        "tooltip": false
+    },
+
+    "clock": {
+        "timezone": "Africa/Casablanca",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "  {:%d/%m/%Y}",
+        "format": "  {:%I:%M %p}"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "rotate": 0,
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-click": "brightnessctl -r",
+				"on-scroll-up": "brightnessctl set 2%+",
+        "on-scroll-down": "brightnessctl set 2%-",
+        "min-length": 6
+    },
+ 
+    "bluetooth": {
+	"controller": "blueberry",
+	"format": "",
+	"format-disabled": "",
+	"format-off": " off",
+	"on-click": "blueberry",
+	"on-click-right": "blueberry"
+    },
+    
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "default": [" ", " ", " "]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+    },
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "wlogout",
+        "on-click-right": "killall rofi",
+        "format": "⏻ ",
+    },
+    
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "{profile}",
+        "tooltip": true,
+        "format-icons": {
+            "performance": "󰓅",
+            "balanced": "󰾅",
+            "power-saver": "󰾆",
+        }
+    },
+
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "wlogout",
+        "on-click-right": "killall rofi",
+        "format": "⏻ ",
+    },
+
+    "custom/updates": {
+        "format": "  {}",
+        "escape": true,
+        "return-type": "text",
+        "exec": "~/.config/waybar/update.sh",
+        "restart-interval": 60,
+        "on-click": "kitty -e sudo pacman -Syu",
+    },
+
+    "hyprland/language": {
+        "format": "  {short}",
+    },
+        "network": {
+        "interface": "wlan0",
+
+        "format": "{ifname}",
+        "format-disconnected": "",
+
+        "format-wifi": "  {essid}",
+        "tooltip-format": "{signalStrength}%",
+        "tooltip-format-wifi": "{essid} {signalStrength}%",
+        "tooltip-format-disconnected": "No Connection",
+        "on-click": "networkmanager_dmenu",
+        "on-click-right": "nm-connection-manager",
+    },      
+    "custom/prev": {
+        "format": "⏮",
+        "on-click": "playerctl --player=playerctld previous"
+},
+    "custom/playpause": {
+        "exec": "playerctl --player=playerctld status 2>/dev/null | grep -q Playing && echo '' || echo ''",
+        "interval": 1,
+        "return-type": "text",
+        "on-click": "playerctl --player=playerctld play-pause"
+},
+    "custom/next": {
+        "format": "⏭",
+        "on-click": "playerctl --player=playerctld next"
+},
+
+    "cpu": {
+        "format": "󰇺 {usage}%",
+        "tooltip": true
+},
+    "memory": {
+        "format": "󰏗 {percentage}%",
+        "tooltip": true
+}
+
+}

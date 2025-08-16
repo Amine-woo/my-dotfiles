@@ -1,0 +1,8 @@
+#!/bin/bash
+for pid in $(pidof kitty); do
+  kitty @ --to unix:/tmp/kitty_pywal-$pid set-colors -c --all ~/.cache/wal/colors-kitty.conf
+done
+
+pkill -f dunst; hyprctl dispatch exec dunst
+
+magick /tmp/hyprwal_current_frame.png -blur 0x8 /tmp/hyprwal_current_frame_blur.png

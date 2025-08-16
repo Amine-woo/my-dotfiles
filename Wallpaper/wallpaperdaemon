@@ -1,0 +1,482 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import socket
+import subprocess
+import random
+import json
+import logging
+import signal
+from pathlib import Path
+import shutil
+
+WALLPAPER_DIR = Path.home() / "Wallpapers"
+CONFIG_DIR = Path.home() / ".config" / "wallpaper"
+HOOK_FILE_PATH = CONFIG_DIR / "hook"
+SOCKET_PATH = Path("/tmp/wallpaper.sock")
+LOG_FILE = Path("/tmp/wallpaperdaemon.log")
+PYWAL_FRAME_PATH = Path("/tmp/wallpaper_current_frame.png")
+
+MPVPAPER_OUTPUT = "*"
+MPVPAPER_MPV_ARGS="no-audio loop-file=inf --video-aspect-override=16:10"
+
+FFMPEG_FRAME_SEEK_TIME = "00:00:01.000"
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler(LOG_FILE)
+fh.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
+logger.addHandler(fh)
+ch = logging.StreamHandler(sys.stdout)
+ch.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
+logger.addHandler(ch)
+
+
+def ensure_hook_file_exists():
+    if not HOOK_FILE_PATH.exists():
+        logger.info(f"Hook file not found at {HOOK_FILE_PATH}. Creating it.")
+        try:
+            CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+            with open(HOOK_FILE_PATH, "w") as f:
+                f.write("#!/bin/bash\n\n")
+                f.write("# This script is executed after a wallpaper change by wallpaperdaemon.py\n")
+                f.write("# You can use it to run custom commands, like updating other applications.\n\n")
+                f.write("# Environment variables available:\n")
+                f.write("# WALLPAPER_PATH\n")
+                f.write("# WALLPAPER_FILENAME\n")
+                f.write("# WALLPAPER_FORMATTED_NAME\n\n")
+                f.write("# Example: Notify about the new wallpaper\n")
+                f.write("# notify-send \"Wallpaper Changed\" \"Set to: $WALLPAPER_FORMATTED_NAME\" \n\n")
+                f.write("# Example: Log to a custom file\n")
+                f.write("# echo \"[$(date)] Wallpaper set to $WALLPAPER_PATH\" >> ~/.config/wallpaper/hook.log\n\n")
+                f.write("# Example: Reload Kitty terminal themes (make sure 'jq' is installed)\n")
+                f.write("# KITTY_COLORS_FILE=\"${HOME}/.cache/wal/colors-kitty.conf\"\n")
+                f.write("# if command -v kitty &> /dev/null && [ -f \"$KITTY_COLORS_FILE\" ]; then\n")
+                f.write("#   if command -v jq &> /dev/null; then\n")
+                f.write("#     kitty_json_output=$(kitty @ ls)\n")
+                f.write("#     if [ $? -eq 0 ] && [ -n \"$kitty_json_output\" ] && [ \"$kitty_json_output\" != \"[]\" ]; then\n")
+                f.write("#       echo \"$kitty_json_output\" | jq -r '.[] | .tabs[].windows[] | select(.\"kitty-listen-on\" != null) | .\"kitty-listen-on\"' | sort -u | while read -r socket_path; do\n")
+                f.write("#         kitty @ --to \"$socket_path\" set-colors --all --configured \"$KITTY_COLORS_FILE\"\n")
+                f.write("#       done\n")
+                f.write("#     else\n")
+                f.write("#       kitty @ set-colors --all --configured \"$KITTY_COLORS_FILE\"\n")
+                f.write("#     fi\n")
+                f.write("#   else\n")
+                f.write("#     kitty @ set-colors --all --configured \"$KITTY_COLORS_FILE\"\n")
+                f.write("#   fi\n")
+                f.write("# fi\n")
+
+            os.chmod(HOOK_FILE_PATH, 0o755)
+            logger.info(f"Created and made executable: {HOOK_FILE_PATH}")
+        except Exception as e:
+            logger.error(f"Failed to create or chmod hook file {HOOK_FILE_PATH}: {e}", exc_info=True)
+
+class WallpaperManager:
+    def __init__(self):
+        self.wallpapers = []
+        self.current_wallpaper_info = None
+        self.scan_wallpapers()
+
+    def _format_wallpaper_name(self, filename_stem):
+        return filename_stem.replace("_", " ").replace("-", " ").title()
+
+    def scan_wallpapers(self):
+        self.wallpapers = []
+        if not WALLPAPER_DIR.exists() or not WALLPAPER_DIR.is_dir():
+            logger.warning(
+                f"Wallpaper directory {WALLPAPER_DIR} does not exist or is not a directory."
+            )
+            return
+        for item in WALLPAPER_DIR.iterdir():
+            if item.is_file() and item.suffix.lower() == ".mp4":
+                self.wallpapers.append(
+                    {
+                        "path": str(item.resolve()),
+                        "filename": item.name,
+                        "formatted_name": self._format_wallpaper_name(item.stem),
+                    }
+                )
+        logger.info(f"Scanned {len(self.wallpapers)} MP4 wallpapers from {WALLPAPER_DIR}")
+
+    def _extract_frame_for_pywal(self, video_path_str):
+        ffmpeg_executable = shutil.which("ffmpeg")
+        if not ffmpeg_executable:
+            logger.error("`ffmpeg` command not found in PATH. Cannot extract frame for Pywal.")
+            return False
+        video_path = Path(video_path_str)
+        if not video_path.exists():
+            logger.error(f"Video file {video_path_str} does not exist for frame extraction.")
+            return False
+        if PYWAL_FRAME_PATH.exists():
+            try:
+                PYWAL_FRAME_PATH.unlink()
+            except OSError as e:
+                logger.error(f"Could not remove old pywal frame {PYWAL_FRAME_PATH}: {e}")
+                return False
+        command = [
+            ffmpeg_executable, "-ss", FFMPEG_FRAME_SEEK_TIME, "-i", str(video_path),
+            "-vframes", "1", "-q:v", "2", "-an", "-y", str(PYWAL_FRAME_PATH)
+        ]
+        logger.info(f"Extracting frame for Pywal using ffmpeg: {' '.join(command)}")
+        try:
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=15)
+            if result.stdout: logger.debug(f"ffmpeg stdout: {result.stdout.strip()}")
+            if result.returncode == 0:
+                if result.stderr: logger.debug(f"ffmpeg stderr (info): {result.stderr.strip()}")
+                if PYWAL_FRAME_PATH.exists() and PYWAL_FRAME_PATH.stat().st_size > 0 :
+                    logger.info(f"Successfully extracted frame from {video_path_str} to {PYWAL_FRAME_PATH}")
+                    return True
+                else:
+                    logger.error(f"ffmpeg reported success but output frame {PYWAL_FRAME_PATH} is missing or empty.")
+                    if result.stderr: logger.error(f"ffmpeg stderr (info): {result.stderr.strip()}")
+                    return False
+            else:
+                logger.error(f"ffmpeg failed to extract frame. Return code: {result.returncode}.")
+                if result.stderr: logger.error(f"ffmpeg stderr: {result.stderr.strip()}")
+                if not PYWAL_FRAME_PATH.exists():
+                    logger.error(f"Output frame {PYWAL_FRAME_PATH} was not created.")
+                return False
+        except subprocess.TimeoutExpired:
+            logger.error(f"ffmpeg command timed out while extracting frame from {video_path_str}.")
+            return False
+        except Exception as e:
+            logger.error(f"Error running ffmpeg for frame extraction: {e}", exc_info=True)
+            return False
+
+    def _run_pywal(self):
+        if not PYWAL_FRAME_PATH.exists() or PYWAL_FRAME_PATH.stat().st_size == 0:
+            logger.error(f"{PYWAL_FRAME_PATH} does not exist or is empty. Skipping pywal.")
+            return False
+        wal_executable = shutil.which("wal")
+        if not wal_executable:
+            logger.error("`wal` command not found in PATH. Is pywal installed?")
+            return False
+        try:
+            command = [wal_executable, "-i", str(PYWAL_FRAME_PATH), "-n", "-q", "-s", "-t"]
+            logger.info(f"Running Pywal command: {' '.join(command)}")
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=20)
+            if result.stdout: logger.info(f"Pywal stdout: {result.stdout.strip()}")
+            if result.stderr: logger.warning(f"Pywal stderr: {result.stderr.strip()}")
+            if result.returncode == 0:
+                logger.info("Pywal theme generated successfully.")
+                return True
+            else:
+                logger.error(f"Pywal execution failed with code {result.returncode}.")
+                return False
+        except subprocess.TimeoutExpired:
+            logger.error("Pywal command timed out.")
+            return False
+        except Exception as e:
+            logger.error(f"Error running pywal: {e}", exc_info=True)
+            return False
+
+    def _run_mpvpaper(self, wallpaper_path):
+        mpvpaper_executable = shutil.which("mpvpaper")
+        if not mpvpaper_executable:
+            logger.error("`mpvpaper` command not found in PATH. Is mpvpaper installed?")
+            return False
+        
+        killall_executable = shutil.which("killall")
+        if killall_executable:
+            try:
+                logger.info("Attempting to kill existing mpvpaper instances...")
+                kill_result = subprocess.run([killall_executable, "-q", "mpvpaper"], capture_output=True, text=True, check=False)
+                if kill_result.returncode == 0 : logger.info("Previously running mpvpaper instances (if any) were signalled to terminate.")
+                elif "no process found" in kill_result.stderr.lower(): logger.info("No previous mpvpaper instances found to kill.")
+                else: logger.debug(f"killall mpvpaper finished (code {kill_result.returncode}). stderr: {kill_result.stderr.strip()}")
+            except Exception as e:
+                logger.warning(f"Could not run killall mpvpaper: {e}")
+        else:
+            logger.warning("`killall` command not found. Cannot ensure previous mpvpaper instances are killed.")
+
+        try:
+            command = [
+                mpvpaper_executable, "-f", "-o", MPVPAPER_MPV_ARGS, MPVPAPER_OUTPUT, wallpaper_path
+            ]
+            logger.info(f"Running mpvpaper command: {' '.join(command)}")
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=5)
+
+            if result.stdout: logger.info(f"mpvpaper stdout (on launch):\n{result.stdout.strip()}")
+            if result.stderr: logger.warning(f"mpvpaper stderr (on launch):\n{result.stderr.strip()}")
+
+            if result.returncode == 0:
+                logger.info(f"mpvpaper command for {wallpaper_path} launched successfully.")
+                return True
+            else:
+                 logger.error(f"mpvpaper command execution failed for {wallpaper_path} with code {result.returncode}.")
+                 return False
+        except subprocess.TimeoutExpired:
+            logger.error(f"mpvpaper command '{' '.join(command)}' timed out. This is unexpected with -f (fork).")
+            return False
+        except Exception as e:
+            logger.error(f"Error running mpvpaper: {e}", exc_info=True)
+            return False
+
+    def _run_wallpaper_hook(self):
+        if not self.current_wallpaper_info:
+            logger.warning("No current wallpaper info to provide to hook script. Skipping hook.")
+            return
+
+        if HOOK_FILE_PATH.exists() and os.access(HOOK_FILE_PATH, os.X_OK):
+            logger.info(f"Executing wallpaper change hook: {HOOK_FILE_PATH}")
+            
+            hook_env = os.environ.copy()
+            hook_env["WALLPAPER_PATH"] = self.current_wallpaper_info.get("path", "")
+            hook_env["WALLPAPER_FILENAME"] = self.current_wallpaper_info.get("filename", "")
+            hook_env["WALLPAPER_FORMATTED_NAME"] = self.current_wallpaper_info.get("formatted_name", "")
+            
+            try:
+                result = subprocess.run(
+                    ["/bin/bash", str(HOOK_FILE_PATH)],
+                    capture_output=True, text=True, check=False, timeout=30, env=hook_env
+                )
+                if result.stdout:
+                    logger.info(f"Hook script stdout:\n{result.stdout.strip()}")
+                if result.stderr:
+                    logger.warning(f"Hook script stderr:\n{result.stderr.strip()}")
+                if result.returncode != 0:
+                    logger.warning(f"Hook script exited with code {result.returncode}.")
+                else:
+                    logger.info("Hook script executed successfully.")
+            except subprocess.TimeoutExpired:
+                logger.error(f"Hook script {HOOK_FILE_PATH} timed out.")
+            except Exception as e:
+                logger.error(f"Error executing hook script {HOOK_FILE_PATH}: {e}", exc_info=True)
+        elif HOOK_FILE_PATH.exists():
+            logger.warning(f"Hook file {HOOK_FILE_PATH} exists but is not executable. Skipping.")
+        else:
+            logger.debug(f"Hook file {HOOK_FILE_PATH} does not exist. Skipping hook.")
+
+
+    def set_wallpaper(self, wallpaper_info):
+        if not wallpaper_info or "path" not in wallpaper_info:
+            logger.error("Invalid wallpaper info provided.")
+            return "Error: Invalid wallpaper data."
+
+        wallpaper_path_str = wallpaper_info["path"]
+        wallpaper_path = Path(wallpaper_path_str)
+        if not wallpaper_path.exists():
+            logger.error(f"Wallpaper file {wallpaper_path_str} does not exist.")
+            self.scan_wallpapers()
+            return f"Error: Wallpaper {wallpaper_path_str} not found. Rescanned."
+
+        logger.info(f"Setting wallpaper to: {wallpaper_path_str} (MP4)")
+
+        frame_extracted = self._extract_frame_for_pywal(wallpaper_path_str)
+        if not frame_extracted:
+            logger.warning(f"Could not extract frame for Pywal from {wallpaper_path_str}. Pywal might not update or use an old frame.")
+        
+        self._run_pywal() 
+
+        mpv_success = self._run_mpvpaper(wallpaper_path_str)
+        
+        if mpv_success:
+            self.current_wallpaper_info = wallpaper_info
+            logger.info(f"Successfully set wallpaper to: {self.current_wallpaper_info['formatted_name']}")
+            self._run_wallpaper_hook() 
+            return f"Wallpaper set to: {self.current_wallpaper_info['formatted_name']} (MP4) using mpvpaper."
+        else:
+            return "Error: Failed to set MP4 wallpaper using mpvpaper. Check logs for details."
+
+    def handle_command(self, command_str):
+        parts = command_str.strip().lower().split(maxsplit=1)
+        action = parts[0] if parts else ""
+        logger.info(f"Handling command: {action}")
+
+        if action == "next":
+            if not self.wallpapers:
+                return "Error: No MP4 wallpapers found in ~/Wallpapers."
+            available_wallpapers = [wp for wp in self.wallpapers if wp != self.current_wallpaper_info]
+            if not available_wallpapers: available_wallpapers = self.wallpapers
+            if not available_wallpapers: return "Error: No MP4 wallpapers available to choose from."
+            new_wallpaper = random.choice(available_wallpapers)
+            return self.set_wallpaper(new_wallpaper)
+
+        elif action == "refresh":
+            if not self.current_wallpaper_info:
+                return "Error: No current wallpaper set. Use 'next' or 'restart'."
+            logger.info(f"Refreshing current wallpaper: {self.current_wallpaper_info['formatted_name']}")
+            return self.set_wallpaper(self.current_wallpaper_info)
+
+        elif action == "restart":
+            logger.info("Restarting: Rescanning wallpapers and setting a new one.")
+            self.scan_wallpapers()
+            if not self.wallpapers:
+                return "Error: No MP4 wallpapers found after rescan."
+            new_wallpaper = random.choice(self.wallpapers)
+            return self.set_wallpaper(new_wallpaper)
+
+        elif action == "current":
+            if self.current_wallpaper_info:
+                return f"Current: {self.current_wallpaper_info['formatted_name']} ({self.current_wallpaper_info['filename']})"
+            return "No wallpaper currently set."
+
+        elif action == "list":
+            if not self.wallpapers: return "No MP4 wallpapers found."
+            return "\n".join([f"() {wp['formatted_name']}" for wp in self.wallpapers])
+
+        elif action == "list_json":
+            return json.dumps(self.wallpapers, indent=2)
+
+        elif action == "set_path":
+            if len(parts) < 2:
+                return "Error: set_path requires a wallpaper path."
+            wallpaper_path_to_set = parts[1]
+            logger.info(f"Attempting to set wallpaper by specific path: {wallpaper_path_to_set}")
+            found_wallpaper_info = None
+            for wp_info in self.wallpapers:
+                if wp_info["path"] == wallpaper_path_to_set:
+                    found_wallpaper_info = wp_info
+                    break
+            if found_wallpaper_info:
+                return self.set_wallpaper(found_wallpaper_info)
+            else:
+                logger.warning(f"Path {wallpaper_path_to_set} not found in current wallpaper list.")
+                return f"Error: Wallpaper path {wallpaper_path_to_set} not found in the known list."
+
+        elif action == "shutdown":
+            logger.info("Shutdown command received. Terminating.")
+            return "shutdown_daemon"
+        else:
+            return f"Error: Unknown command '{action}'"
+
+
+def cleanup(signum=None, frame=None):
+    logger.info("Initiating cleanup and shutting down...")
+    killall_executable = shutil.which("killall")
+    if killall_executable:
+        try:
+            logger.info("Attempting to kill any running mpvpaper instances before exit...")
+            subprocess.run([killall_executable, "-q", "mpvpaper"], check=False)
+            logger.info("Finished attempt to kill mpvpaper instances.")
+        except Exception as e:
+            logger.error(f"Error trying to kill mpvpaper during cleanup: {e}", exc_info=True)
+    else:
+        logger.warning("`killall` command not found. Cannot ensure mpvpaper instances are killed on exit.")
+    try:
+        if SOCKET_PATH.exists():
+            SOCKET_PATH.unlink()
+            logger.info(f"Socket file {SOCKET_PATH} removed.")
+    except OSError as e:
+        logger.error(f"Error removing socket file {SOCKET_PATH}: {e}", exc_info=True)
+    try:
+        if PYWAL_FRAME_PATH.exists():
+            PYWAL_FRAME_PATH.unlink()
+            logger.info(f"Pywal temporary frame {PYWAL_FRAME_PATH} removed.")
+    except OSError as e:
+        logger.error(f"Error removing Pywal temporary frame {PYWAL_FRAME_PATH}: {e}", exc_info=True)
+    logger.info("Cleanup complete. Exiting now.")
+    sys.exit(0)
+
+def main():
+    ensure_hook_file_exists()
+
+    if not WALLPAPER_DIR.exists():
+        logger.info(f"Wallpaper directory {WALLPAPER_DIR} does not exist. Creating it.")
+        try:
+            WALLPAPER_DIR.mkdir(parents=True, exist_ok=True)
+        except Exception as e:
+            logger.critical(f"Failed to create wallpaper directory {WALLPAPER_DIR}: {e}. Please create it manually.")
+            sys.exit(1)
+    elif not WALLPAPER_DIR.is_dir():
+        logger.critical(f"{WALLPAPER_DIR} exists but is not a directory. Aborting.")
+        sys.exit(1)
+
+    logger.info(f"Wallpaper Daemon (Foreground Mode for MP4s) starting up...")
+    logger.info(f"Monitoring directory for MP4 files: {WALLPAPER_DIR}")
+    logger.info(f"Using mpvpaper output target: {MPVPAPER_OUTPUT}")
+    logger.info(f"MPV arguments via mpvpaper's -o flag: \"{MPVPAPER_MPV_ARGS}\"")
+    logger.info(f"ffmpeg frame seek time for Pywal: {FFMPEG_FRAME_SEEK_TIME}")
+    logger.info(f"Hook file (will be created if not present): {HOOK_FILE_PATH}")
+    logger.info(f"Socket for ctl: {SOCKET_PATH}")
+    logger.info(f"Log file: {LOG_FILE}")
+
+    signal.signal(signal.SIGINT, cleanup)
+    signal.signal(signal.SIGTERM, cleanup)
+
+    manager = WallpaperManager()
+
+    if manager.wallpapers:
+        initial_wallpaper = random.choice(manager.wallpapers)
+        logger.info(f"Setting initial wallpaper on startup to: {initial_wallpaper['formatted_name']}")
+        response_msg = manager.set_wallpaper(initial_wallpaper)
+        logger.info(f"Initial wallpaper set response: {response_msg}")
+    else:
+        logger.info("No wallpapers found in ~/Wallpapers on startup. Waiting for commands or new files.")
+
+    if SOCKET_PATH.exists():
+        logger.warning(f"Socket file {SOCKET_PATH} already exists. Unlinking.")
+        try:
+            SOCKET_PATH.unlink()
+        except OSError as e:
+            logger.critical(f"Failed to unlink existing socket file {SOCKET_PATH}: {e}. Aborting.")
+            sys.exit(1)
+
+    server_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    try:
+        server_socket.bind(str(SOCKET_PATH))
+        server_socket.listen(1) 
+        logger.info(f"Listening for ctl commands on {SOCKET_PATH}")
+    except Exception as e:
+        logger.critical(f"Failed to bind or listen on socket {SOCKET_PATH}: {e}", exc_info=True)
+        cleanup()
+        sys.exit(1)
+
+    should_run = True
+    while should_run:
+        conn = None 
+        try:
+            logger.debug("Waiting for a connection on the socket...")
+            conn, client_address = server_socket.accept() 
+            logger.debug(f"Accepted connection from {client_address}")
+            
+            with conn: 
+                data = conn.recv(1024)
+                if not data:
+                    logger.debug("No data received from connection, closing.")
+                    continue 
+                
+                command_str = data.decode("utf-8").strip()
+                logger.info(f"Received command: '{command_str}'")
+                
+                response = manager.handle_command(command_str)
+                
+                if response == "shutdown_daemon":
+                    logger.info("Shutdown command received from ctl. Initiating shutdown.")
+                    conn.sendall("Daemon is shutting down.".encode("utf-8"))
+                    conn.shutdown(socket.SHUT_WR)
+                    should_run = False 
+                    continue 
+
+                response_bytes = response.encode("utf-8")
+                conn.sendall(response_bytes)
+                logger.debug(f"Sent response (first 100 bytes): {response_bytes[:100]}")
+                
+                conn.shutdown(socket.SHUT_WR)
+                logger.debug("Socket SHUT_WR called.")
+
+        except socket.timeout: 
+            logger.warning("Socket accept timed out (unexpected).")
+            continue
+        except OSError as e: 
+            if conn: 
+                logger.error(f"OSError with client connection: {e}")
+            else:
+                logger.error(f"OSError on server socket: {e}")
+        except Exception as e:
+            logger.error(f"Unhandled exception in main accept/communication loop: {e}", exc_info=True)
+            if conn: 
+                try:
+                    error_response = f"Daemon error: {e}".encode("utf-8")
+                    conn.sendall(error_response)
+                    conn.shutdown(socket.SHUT_WR)
+                except Exception as send_exc:
+                    logger.error(f"Could not send error to client: {send_exc}")
+    
+    server_socket.close()
+    logger.info("Server socket closed.")
+    cleanup()
+
+if __name__ == "__main__":
+    main()
